@@ -45,37 +45,6 @@ const CreateUserForm = ({createUser}) => {
                     <label htmlFor="pass">Password:</label>
                     <input type="password" name="password"/>
 
-                    {/* Trying to add a spot to unpload a user profile */}
-                    {/* <div> 
-                        <label htmlFor="profilePicture">Profile Picture</label>
-                        <input
-                            type="file"
-                            id="profilePicture"
-                            name="profilePicture"
-                            placeholder="Choose image"
-                            accept="image/png,image/jpeg,image/jpg"
-                            onChange={(e) => {
-                                setImageUpload(e.target.files[0])
-                            }}
-                        />
-                    </div> */}
-                    {/* <div className={styles.createPostForm}
-                        onSubmit={(e) => profilePictureFunction(e, imageUpload)}>
-                        <div> 
-                            <label htmlFor="profilePicture">Image</label>
-                            <input
-                                type="file"
-                                id="profilePicture"
-                                name="profilePicture"
-                                placeholder="Choose image"
-                                accept="image/png,image/jpeg,image/gif,image/jpg"
-                                onChange={(e) => {
-                                    setImageUpload(e.target.files[0])
-                                }}
-                            />
-                        </div>
-                    <button type="submit">Create User</button>
-               */}
                <button type="submit">Create User</button>
                 </form>
             </div>
