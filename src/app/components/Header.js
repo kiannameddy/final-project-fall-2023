@@ -1,18 +1,5 @@
 import Link from "next/link";
 import styles from "./components.module.css";
-// import { Agbalumo, Catamaran } from 'next/font/google';
-
-// const agbalumo = Agbalumo({
-//     subsets: ['latin'],
-//     display: 'swap',
-//     weight: '400'
-//   })
-
-// const catamaran = Catamaran({
-//     subsets: ['latin'],
-//     display: 'swap',
-//     weight: '500'
-// })
 
 const Header = ({isLoggedIn, logoutUser}) => {
     return (
