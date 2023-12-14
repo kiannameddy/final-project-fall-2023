@@ -1,16 +1,35 @@
-import {useCallback, useEffect} from "react"
+import {useCallback, useEffect, useState} from "react"
 import {useRouter} from "next/router";
 import CreatePostForm from "@/app/components/CreatePostForm";
-import {getFirestore, addDoc, collection} from "firebase/firestore";
+import {getFirestore, addDoc, collection, query, where, getDocs} from "firebase/firestore";
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 
 
 export default function CreatePost({isLoggedIn, loginInformation}) {
     // if user is not logged in, send them to login 
     const router = useRouter();
+    const [user, setUser] = useState({});
+
     useEffect(() => {
         if(!isLoggedIn) router.push("/");
     }, [isLoggedIn]);
+
+    useEffect(() => {
+     async function getUser() {
+            let user = {};
+            const db = getFirestore();
+            const q = query(
+                collection(db, "users"),
+                where("userId", "==", loginInformation?.uid)
+            );
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                user = doc.data();
+            });
+            setUser(user);
+        }
+        getUser();
+    }, []);
 
     // Create function to create a post
     const createPostFunction = useCallback(
@@ -38,19 +57,20 @@ export default function CreatePost({isLoggedIn, loginInformation}) {
                     });
         }
         // Get User Information to link post to user
-        const userId = loginInformation.uid;
+        const userId = loginInformation?.uid;
         //Send Post to firebase with addDoc
         const data = await addDoc(collection(db, "posts" ), {
             postContent: postContent, 
             userId: userId,
             imageURL: imageURL || ' ',
+            username: user?.username || "", 
         });
         //Re-route the use away from createPost
         if(data) {
             router.push("/");
         }
         },
-        [addDoc, collection, getFirestore, router, loginInformation]
+        [addDoc, collection, getFirestore, router, loginInformation, user]
     );
 
 

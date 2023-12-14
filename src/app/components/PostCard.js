@@ -28,7 +28,7 @@ const PostCard = ({post}) => {
             <div className={styles.PostCardWrapper}>
 {/* Trying to get the username to show with the post */}
                 <div className={styles.feedUsername}> 
-                    <p>@{post?.userId}</p>
+                    <p>@{post?.name}</p>
                 </div>
                 <div className={styles.feedImage}>
                     <img src={post?.imageURL} alt=""/>
